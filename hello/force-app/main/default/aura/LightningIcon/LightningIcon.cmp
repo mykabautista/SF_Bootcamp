@@ -1,0 +1,51 @@
+<aura:component controller="SearchClass">
+   <!---<aura:attribute name="buttonLabel" type="String"/>
+    <lightning:button aura:id="button1" label="Button 1"/><br/>
+    {!v.buttonLabel}
+    <lightning:button label="Get label" onclick="{!c.getLabel}"/>-->
+    
+    <h2 class="header">Hello World</h2>
+    <aura:attribute name="accList" type="Account[]"/>
+    <aura:attribute name="inputName" type="String"/>
+    <aura:attribute name="truthy" type="Boolean"/>
+    <aura:attribute name="block" type="Boolean"/>
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="visible" type="boolean" default="true"/>
+    <aura:attribute name="notVisible" type="boolean" default="false"/>
+    <aura:attribute name="search" type="boolean"/>
+    	<lightning:input aura:id="Name1" label="Enter name here" minlength="4" />
+              <aura:if isTrue="{!v.truthy}">
+                  <h1>Invalid Input: Enter more than 3 characters.</h1>
+              </aura:if> 
+     <lightning:button label="Hello" onclick="{!c.helloButton}"/>
+
+   			 <aura:if isTrue="{!v.visible}">
+             	<lightning:button label="Show" onclick="{!c.showBlock}"/>
+   			 </aura:if>
+    		<aura:if isTrue="{!v.notVisible}">
+             	<lightning:button label="Hide" onclick="{!c.showBlock}"/>
+   			 </aura:if>
+    
+    		 <aura:if isTrue="{!v.notVisible}">
+             	<h3>loooooooooonggggggggg teeeeeeeeeeeexxxxxxxxxt</h3>
+   			 </aura:if> 
+
+    <h2 class="header">Account Search</h2>
+    <lightning:input aura:id="accsearch" label="Search here"/>
+    <lightning:button class="btn3" label="Search Account" onclick="{!c.searchButton}"/>
+        <aura:iteration items="{!v.accList}" var="acc">
+              <table style="width:50%">
+              <tr>
+                <th>NAME</th>
+                <th>PHONE</th> 
+                <th>TYPE</th>
+              </tr>
+              <tr>
+                <td>{!acc.Name}</td>
+                <td>{!acc.Phone}</td> 
+                <td>{!acc.Type}</td>
+              </tr>
+            </table>
+            
+    	</aura:iteration>
+</aura:component>

@@ -1,0 +1,12 @@
+<apex:page standardController="Account">
+   <apex:pageBlock title="The Pageblock">
+       <apex:pageBlockSection >
+           <apex:outputfield value="{!Account.Name}"/>
+                <apex:outputLabel value="Some text" for="theMessage"/>
+                <apex:outputText value="Hello, World!" id="theMessage"/>
+       
+   
+   
+      </apex:pageBlockSection>
+   </apex:pageBlock>
+</apex:page>

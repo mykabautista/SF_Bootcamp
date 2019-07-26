@@ -1,0 +1,42 @@
+<aura:component>
+    <!--Attributes-->
+    <aura:attribute name="parentInput" default="Parent Message" type="String" />
+    <aura:attribute name="msgFromChild" default="" type="String"/>
+    <aura:attribute name="msgFromOtherChild" default="" type="String"/>
+    <!--Handlers-->
+    <aura:handler name="change" value="{!v.parentInput}" action="{!c.parentInputChange}"/>  
+    <aura:handler name="childEvent" event="c:sampleEvent" action="{!c.passEventmessagetoParent}"/>
+    <aura:handler event="c:sampleApplicationEvent" action="{!c.passAppEventmessagetoParent}"/> 
+    <!--Body-->
+    <lightning:layout class="slds-media slds-p-around_medium" horizontalAlign="center">    
+        <div class="slds-page-header slds-border_top">
+            <lightning:layout class="slds-media slds-p-bottom_medium" horizontalAlign="spread">
+                <lightning:layoutItem class="">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Parent Component"> <lightning:icon iconName="standard:avatar" size="large" alternativeText="Parent Component"/>Parent Component</h1>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small">
+                    <lightning:input aura:id="parentInputId" label="Parent Input"  value="{!v.parentInput}" />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small">
+                    <lightning:button variant="brand" label="Access Child Method" iconName="utility:custom_apps" iconPosition="left" onclick="{!c.getChildMethod}" />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <!--Card for Child-->
+            <lightning:card title="Message from Child displays here:">
+                {!v.msgFromChild}
+            </lightning:card>
+            <!--Card for Other Child-->
+            <aura:if isTrue="{!v.msgFromOtherChild !=  ''}">
+                <lightning:card title="Message from Other Child displays here:">
+                    {!v.msgFromOtherChild}
+                </lightning:card>
+            </aura:if>            
+        </div>
+        <!--Child Component container-->
+        <c:ChildComponent aura:id="childComponentId" childOutput="{#v.parentInput}"/>
+    </lightning:layout>
+    <!--Other Child Component container-->
+    <lightning:layout class="slds-media slds-p-around_medium" horizontalAlign="center">    
+        <c:OtherChildComponent aura:id="otherChildComponentId" otherChildOutput="{!v.parentInput}"/>
+    </lightning:layout>   
+</aura:component>

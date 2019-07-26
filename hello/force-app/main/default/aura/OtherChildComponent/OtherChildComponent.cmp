@@ -1,0 +1,27 @@
+<aura:component >
+    <!--Attributes-->
+    <aura:attribute name="otherChildInput" default="" type="String"/>
+    <aura:attribute name="otherChildOutput" default="" type="String"/>
+    
+    <!--Handler-->
+    <aura:registerEvent name="otherChildEvent" type="c:sampleApplicationEvent"/>
+    
+    <!--Body-->
+    <div class="slds-page-header slds-border_top">
+        <lightning:layout class="slds-media slds-p-bottom_medium" verticalAlign="end">
+            <lightning:layoutItem >
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Other Child Component"> <lightning:icon iconName="standard:team_member" size="large" alternativeText="Other Child Component"/>Other Child Component</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:input label="Other Child Input" name="Other Child Input" value="{!v.otherChildInput}" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:button variant="brand" label="Send to Listeners" iconName="utility:broadcast" iconPosition="left" onclick="{!c.sendToListeners}" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <!--Output Card-->
+        <lightning:card title="Message from Parent displays here:">
+        {!v.otherChildOutput}
+        </lightning:card>        
+    </div>
+</aura:component>

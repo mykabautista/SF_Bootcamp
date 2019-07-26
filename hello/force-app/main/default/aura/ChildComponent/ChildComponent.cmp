@@ -1,0 +1,39 @@
+<aura:component >
+    <!--Attributes-->
+    <aura:attribute name="childInput" default="" type="String"/>
+    <aura:attribute name="childOutput" default="" type="String"/>
+    <aura:attribute name="msgFromOtherChild" default="" type="String"/>
+    
+    <!--Handler-->
+    <aura:registerEvent name="childEvent" type="c:sampleEvent"/>
+    <aura:handler event="c:sampleApplicationEvent" action="{!c.passAppEventmessagetoChild}"/>    
+    <aura:method name="sendToParentAuraMthd" action="{!c.sendToParent}"/> 
+    
+    <!--Body-->
+    <div class="slds-page-header slds-border_top">
+        <lightning:layout class="slds-media slds-p-bottom_medium" verticalAlign="end">
+            <lightning:layoutItem >
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Child Component"> <lightning:icon iconName="standard:team_member" size="large" alternativeText="Child Component"/>Child Component</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:input label="Child Input" name="Child Input" value="{!v.childInput}" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:button variant="brand" label="Send to Parent" iconName="utility:capslock" iconPosition="left" onclick="{!c.sendToParent}" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small">
+                <lightning:button variant="brand" label="Change Child Output" iconName="utility:capslock" iconPosition="left" onclick="{!c.changeChild}" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <!--Output Card-->
+        <lightning:card title="Message from Parent displays here:">
+            {!v.childOutput}
+        </lightning:card>
+        <!--Output Card for Other Child-->
+        <aura:if isTrue="{!v.msgFromOtherChild !=  ''}">
+            <lightning:card title="Message from Other Child displays here:">
+                {!v.msgFromOtherChild}
+            </lightning:card>
+        </aura:if>        
+    </div>
+</aura:component>

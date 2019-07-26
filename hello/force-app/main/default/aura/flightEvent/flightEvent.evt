@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION"  >
+    <aura:attribute name="from" type="string"/>
+    <aura:attribute name="to" type="string"/>
+    <aura:attribute name="Depdate" type="date"/>
+</aura:event>

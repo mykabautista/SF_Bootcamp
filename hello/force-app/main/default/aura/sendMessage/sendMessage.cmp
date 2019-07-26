@@ -1,0 +1,8 @@
+<aura:component > <!--child component-->
+  <aura:registerEvent name="send" type="c:sendMessageEvent"/> <!--name is called in parent component
+    <button onclick="{!c.sendMessage}">Send</button> -->
+    
+    <aura:method name="sayHelloAgain"
+                 action="{!c.handleSayHello}"
+                 access="public"/>
+</aura:component>

@@ -1,0 +1,4 @@
+<!--Component Event-->
+<aura:event type="COMPONENT" description="Component Event for  passing attributes to Related Components">
+    <aura:attribute name="eventMessage" type="String"/>
+</aura:event>

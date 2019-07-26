@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Application For Passing values to Components without relationship" >
+    <aura:attribute name="appEventMessage" type="String"/>
+</aura:event>

@@ -1,0 +1,35 @@
+<aura:component controller="FlightsClass" implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="flightList" type="Flight__c" default="{'sobjectType':'Flight__c', 
+                                                                'Flight_Number__c': '',
+                                                                'Departure_Time__c': '',
+                                                                'Flying_From__c': '',
+                                                                'Flying_To__c': '',
+                                                                'Departure_Date__c': ''}"/>
+    
+    <fieldset class="slds-box slds-theme--default slds-container--large">
+        
+        
+        <lightning:recordEditForm objectApiName="Flight__c">
+            
+            
+            
+            <h2><lightning:icon iconName="custom:custom20" alternativeText="Click to Call"/>
+                Where would you like to go? <br/><br/> </h2>
+            
+            
+            <lightning:inputField aura:id="flightFrom" fieldName="Flying_From__c" required="true"/>
+            <lightning:inputField aura:id="flightTo" fieldName="Flying_To__c" required="true"/>
+            
+            
+            <lightning:input aura:id="dDate" 
+                             type="date" value="{!v.flightList.Departure_Date__c}" 
+                             label="Departure Date" required="true"/> <br/>
+            <div align="center" draggable="false" >
+                <lightning:button variant="brand" label="Find Flights" title="Find Flights" onclick="{!c.flightsButton}" /></div>
+            
+            
+        </lightning:recordEditForm>
+        
+        
+    </fieldset>
+</aura:component>

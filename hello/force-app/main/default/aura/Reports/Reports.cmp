@@ -1,0 +1,13 @@
+<aura:component controller="DonationsController" implements="flexipage:availableForAllPageTypes" access="global"  >
+	<aura:attribute name="totalAmount" type="Double"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+      
+     <fieldset class="slds-box slds-theme--default slds-container--small">
+         <legend id="newdonationform" class="slds-text-heading--small 
+         slds-p-vertical--medium">
+         </legend>
+         <label>Total Donation</label><br/>
+    		$<ui:outputText value="{!v.totalAmount}"/>
+         </fieldset>
+          
+</aura:component>

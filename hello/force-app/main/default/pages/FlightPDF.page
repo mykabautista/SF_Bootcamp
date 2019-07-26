@@ -1,0 +1,11 @@
+<apex:page standardController="Booking__c" renderAs="pdf">
+      <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <p>Hi, <apex:outputField value="{!Booking__c.Contact__c}"/>!<br/> Thank you for booking with Deloitte Airlines. Please see flight details below for your reference:</p>
+        
+          Flight Number:<apex:outputField value="{!Booking__c.Flight__r.Flight_Number__c}"/><br/>
+          Departure Date:<apex:outputField value="{!Booking__c.Flight__r.Departure_Date__c}"/><br/>
+          Origin:<apex:outputField value="{!Booking__c.Flight__r.Flying_From__c}"/><br/>
+          Destination:<apex:outputField value="{!Booking__c.Flight__r.Flying_To__c}"/><br/>
+          Total Amount: <apex:outputField value="{!Booking__c.Flight__r.Fly_Only__c}"/><br/>
+    </html>
+</apex:page>

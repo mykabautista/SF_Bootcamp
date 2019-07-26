@@ -1,0 +1,101 @@
+<apex:page controller="AcctSearch" tabstyle="Account_Search__tab" >
+<img id="theImage" src="https://c.na85.content.force.com/servlet/servlet.FileDownload?file=0151U000001UoV4" width="200" height="70"/> 
+<apex:pageMessages id="ezzel" />
+ 
+    <apex:form id="accountSearchID">
+  <!------------------------------SEARCH CRITERIA---------------------------------------------------------->
+    <apex:pageBlock title="Search Criteria" helpTitle="How to Search" helpUrl="/apex/howtosearch">
+    
+  
+
+        <table width="100%">
+         <tr>
+             <th><apex:outputLabel value="{!$Label.Account_Name}"/></th>  
+             <th><apex:outputLabel value="Country"/></th>
+             <th><apex:outputLabel value="Contact Name"/></th>  
+             <th><apex:outputLabel value="{!$Label.Account_Type}"/></th> 
+         </tr>
+         <tr>
+           <td><apex:inputText value="{!accountSearchAccountName}"/></td>
+             <td><apex:inputText value="{!accountSearchCountry}"/></td>
+             <td><apex:inputText value="{!accountSearchContactName}"/></td> 
+             <td><apex:selectList id="type" value="{!accountSearchType}" size="1"  >
+                 <apex:selectOptions value="{!PickValues}"/>
+                
+                </apex:selectList></td>   
+         </tr>
+         <tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td><apex:commandButton value="Find Results" action="{!submitForm}"/></td>
+         </tr>
+         </table>        
+    </apex:pageBlock> 
+    
+    
+ <!------------------------------------SEARCH RESULTS---------------------------------------------------->
+     
+    <apex:pageBlock title="Search Results" >
+        <apex:pageBlockTable value="{!customPaging.showResult}" var="a" rendered="{!hasSearchResults==true}">
+            <apex:column >
+                    <apex:facet name="header">Name</apex:facet>
+                    <apex:outputLink onclick="window.open('/{!a.acc.Id}','')">{!a.acc.Name}</apex:outputLink>  
+            </apex:column>
+            <apex:column >
+                    <apex:facet name="header">Billing Country</apex:facet>
+                    <apex:outputText value="{!a.acc.BillingCountry}"></apex:outputText> 
+            </apex:column>
+            <apex:column >
+                    <apex:facet name="header">Shipping Country</apex:facet>
+                    <apex:outputText value="{!a.acc.ShippingCountry}"></apex:outputText>
+            </apex:column>
+            <apex:column >
+                    <apex:facet name="header">Contact Name</apex:facet>
+                   	<apex:outputLink onclick="window.open('/{!a.con.Id}','')">{!a.con.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column >
+                    <apex:facet name="header">Account Type</apex:facet>
+                    <apex:outputText value="{!a.acc.Type}"></apex:outputText>
+            </apex:column>
+            <apex:column >
+                    <apex:facet name="header">Year Created</apex:facet>
+                    <apex:outputText value="{0, date, yyyy}">
+                    <apex:param value="{!a.acc.CreatedDate}" /> 
+                    </apex:outputText>
+                    <!--<apex:outputText value="{!a.acc.CreatedDate}"></apex:outputText>-->
+            </apex:column>
+          
+            <!--PAGINATION-->
+            
+                    
+            p
+
+            
+        </apex:pageBlockTable>
+         
+                    <apex:outputText rendered="{!hasSearchResults==false}">No Matching Records.</apex:outputText>
+                 <center>
+                <apex:commandButton disabled="{!customPaging.hasPrevious}" action="{!customPaging.gotoFirstPage}" status="loadingAccounts" rerender="accountSearchID" value="<<" />
+                <apex:commandButton disabled="{!customPaging.hasPrevious}" action="{!customPaging.gotoPrevious}" status="loadingAccounts" rerender="accountSearchID" value="<<Previous" />
+                <apex:commandButton disabled="{!customPaging.hasNext}" action="{!customPaging.gotoNext}" status="loadingAccounts" rerender="accountSearchID" value=" Next>>" />
+                <apex:commandButton disabled="{!customPaging.hasNext}" action="{!customPaging.gotoLastPage}" status="loadingAccounts" rerender="accountSearchID" value=">>" />
+            </center>
+            <apex:actionStatus id="loadingAccounts">
+                    <apex:facet name="start">
+                        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;"/>
+                        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 20% 40%">
+                            <div style="display: inline-block; padding: 10px; background-color: #fff; width: 250px; height: 40px; ">
+                                <img src="/img/loading.gif" style="float: left; margin: 10px;" />
+                                <span style="display: inline-block; margin: 10px;">Loading More Accounts...</span>
+                            </div>
+                        </div>                        
+                    </apex:facet>
+                </apex:actionStatus>
+            
+    </apex:pageBlock>
+
+   </apex:form> 
+
+</apex:page>

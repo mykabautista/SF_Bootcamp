@@ -1,0 +1,11 @@
+.THIS {
+}
+h2.THIS{
+    font-size: 70px;
+}
+h1.THIS{
+    color: red;
+}
+.THIS.toggle {
+    display: none;
+}

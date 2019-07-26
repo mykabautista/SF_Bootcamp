@@ -1,0 +1,46 @@
+<apex:page >
+    <div style="font-size:14px; font-family:Calibri;">
+        <h1 style="font-weight:bold;">TO SEARCH FOR ACCOUNTS</h1>
+        <ul style="list-style-type: none;">
+            <li>1.  Provide a value for at least one of the following filters:
+                <ul>
+                    <li>Account Name – Accepts letters, numbers and symbols.</li>
+                    <li>Country – Accepts letters, numbers and symbols. Matched against Billing Country and / or Shipping Country.</li>
+                    <li>Contact Name – Accepts letters, numbers and symbols.</li>
+                    <li>Account Type – Select 1 of the options from the selection.</li>
+                </ul>
+            </li>
+            <li>2.  Click the “Find Accounts” button.</li>
+            <li>3.  The matching Account records will be displayed on the Search Results section.</li>
+        </ul>
+    </div>
+    
+    <div style="font-size:14px; font-family:Calibri;">
+        <h1 style="font-weight:bold;">USING WILDCARDS</h1>
+        <p style="text-indent: 55px;">The Account Name filter accepts the use of an asterisk (*) as a wildcard character that represents any number of characters.</p>
+        <p style="text-indent: 55px;">The Country and Contact Name filters do not support the use of the asterisk as a wildcard.</p>
+    </div>
+    
+    <div style="font-size:14px; font-family:Calibri;">
+        <h1 style="font-weight:bold;">NAVIGATING RESULTS</h1>
+        <p style="text-indent: 55px;">At the bottom of the list of matching Account records are a set of navigation buttons:</p>
+        <div style="margin-left:30px;">
+            <ul>
+                <li>First – Shows the first page for the results.</li>
+                <li>Previous – Shows the prior page of results.</li>
+                <li>Next – Shows the succeeding page of results.</li>
+                <li>Last – Shows the final page of results.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="font-size:14px; font-family:Calibri;">
+        <h1 style="font-weight:bold;">VIEWING ACCOUNTS</h1>
+        <p style="text-indent: 55px;">To view the details of an Account record, click the name of the Account from the search results. The Account opens on a separate window or tab.</p>
+    </div>
+    
+    <div style="font-size:14px; font-family:Calibri;">
+        <h1 style="font-weight:bold;">VIEWING CONTACTS</h1>
+        <p style="text-indent: 55px;">To view the details of a Contact record, click the name of the Contact from the search results. The Contact opens on a separate window or tab.</p>
+    </div>
+</apex:page>

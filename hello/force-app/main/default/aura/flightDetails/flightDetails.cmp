@@ -1,0 +1,110 @@
+<aura:component controller="FlightsClass" implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute type="Flight__c[]" name="flightList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="selectedAccts" type="Flight__c" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="totalAmount" type="Double"/>
+    <aura:attribute name="norecords" type="String"/>
+   <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> -->
+    <aura:attribute name="newContact" type="Contact" default="{ 'sobjectType': 'Contact',
+                                                              'FirstName': '',
+                                                              'LastName': '',
+                                                              'Email': ''}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.flightFunc}"/>
+    <aura:handler event="c:flightEvent" action="{!c.getFlights}"/>
+    <aura:dependency resource="markup://force:navigateToSobject" type="EVENT"/>
+    
+   <fieldset class="slds-box slds-theme--default slds-container--large">
+            
+            <lightning:recordEditForm objectApiName="Flight__c">
+                
+                <form class="slds-form--stacked">    
+                    
+                    <lightning:icon iconName="custom:custom20" alternativeText="Click to Call"/>
+                    Flight Result 
+                    <div class="slds-float--right">
+                        <lightning:button onclick="{!c.openModel}" label="Book Flight" variant="brand" disabled="true" aura:id="disablebuttonid"/></div>
+                    <lightning:datatable data="{! v.flightList }"
+                                         columns="{! v.mycolumns }"
+                                         keyField="id"
+                                         maxRowSelection="1"
+                                         onrowselection="{!c.handleSelect}"/>
+                    <div class="slds-align_absolute-center"><ui:outputText value="{!v.norecords}"/></div>
+                    
+                    
+                    <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+                    <aura:if isTrue="{!v.isOpen}">
+                        
+                        <!--###### MODAL BOX Start######--> 
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" 
+                                 class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- ###### MODAL BOX HEADER Start ######-->
+                                <header class="slds-modal__header">
+                                    <lightning:buttonIcon iconName="utility:close"
+                                                          onclick="{! c.closeModel }"
+                                                          alternativeText="close"
+                                                          variant="bare-inverse"
+                                                          class="slds-modal__close"/>
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Booking</h2>
+                                </header>
+                                <!--###### MODAL BOX BODY Part Start######-->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <lightning:input aura:id="conFirst" 
+                                                     value="{!v.newContact.FirstName}" 
+                                                     label="First Name"
+                                                     required="true"/>
+                                    <lightning:input aura:id="conLast" 
+                                                     value="{!v.newContact.LastName}" 
+                                                     label="Last Name"
+                                                     required="true"/>
+                                    <lightning:input aura:id="conEmail" 
+                                                     value="{!v.newContact.Email}" 
+                                                     label="Email"
+                                                     required="true"/><br/>
+                                    <div class="slds-grid">
+                                      <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                                        <span>Flight Number: <br/> {!v.selectedAccts.Flight_Number__c}</span>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                                        <span>Departure Date: <br/> {!v.selectedAccts.Departure_Date__c}</span>
+                                      </div>
+                                    </div>
+                                    <div class="slds-grid">
+                                      <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                                        <span>Origin: <br/> {!v.selectedAccts.Flying_From__c}</span>
+                                      </div>
+                                      <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                                        <span>Destination: <br/> {!v.selectedAccts.Flying_To__c}</span>
+                                      </div>
+                                    </div>
+                                  <br/>
+                                     <div class="slds-float_right">
+                                       Total Amount: {!v.selectedAccts.Fly_Only__c}</div>
+                                    <!--  <label>Total Amount:</label><br/>
+    									$<ui:outputText value="{!v.totalAmount}"/> -->
+                                </div>
+                                <!--###### MODAL BOX FOOTER Part Start ######-->
+                                <footer class="slds-modal__footer">
+                                    <lightning:button variant="neutral" 
+                                                      label="Cancel"
+                                                      title="Cancel"
+                                                      onclick="{! c.closeModel }"/>
+                                    <lightning:button variant="brand" 
+                                                      label="Finalize Booking"
+                                                      title="Finalize Booking"
+                                                      onclick="{! c.finalBooking }"
+                                                      />
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                        <!--###### MODAL BOX Part END Here ######-->
+                         
+                    </aura:if>
+                </form>
+                
+            </lightning:recordEditForm>
+      
+    </fieldset>
+</aura:component>
